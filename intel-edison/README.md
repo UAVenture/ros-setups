@@ -6,11 +6,16 @@ To flash Ubilinux carefully follow the instruction here http://www.emutexlabs.co
 
 Make sure you have the console USB cable in place and use it so you know when the installation has finished. You MUST NOT remove power before it’s done or it could be bricked. If you don't have a console connection make sure you wait 2 minutes at the end of the installation as it instructs. During this time it is completing the installion which shoudln't be interrupted.
 
-Connect to the console with 115000 8N1, for example: screen /dev/USB0 115200 8N1 and login as root (password: edison)
+Connect to the console with 115000 8N1, for example: 
 
+`screen /dev/USB0 115200 8N1` 
+
+and login as root (password: edison)
+
+
+## Post Ubilinux Install
 After Ubilinux has been installed you will end up with the following partitions:
 
-# H2 Post Ubilinux Install
 ```
 Filesystem       Size  Used Avail Use% Mounted on
 rootfs           1.4G  520M  796M  40% /
@@ -24,9 +29,9 @@ tmpfs            481M     0  481M   0% /tmp
 /dev/mmcblk0p10  1.6G  2.4M  1.6G   1% /home
 ```
 
+## Post ROS Install
 Once ROS is installed there won't be much space left on the root partition. TODO: Add howto on freeing up space.
 
-# H2 Post ROS Install
 ```
 Filesystem       Size  Used Avail Use% Mounted on
 rootfs           1.4G  1.3G   27M  98% /
@@ -42,7 +47,7 @@ tmpfs            481M     0  481M   0% /tmp
 
 # Post Installation Steps
 
-# H2 Wifi
+## Wifi
 Run `wpa_passphrase your-ssid your-wifi-password` to generate pka.
 `cd /etc/network`
 Edit interfaces
@@ -54,13 +59,13 @@ Edit interfaces
 - Save
 Run: `ifup wlan0`
 
-# H2 Update
+## Update
 ```
 apt-get -y update
 apt-get -y upgrade
 ```
 
-# H2 Locales
+## Locales
 ```
 dpkg-reconfigure locales # Select only en_US.UTF8
 locale-gen en_US
@@ -68,16 +73,16 @@ update-locale
 ```
 Update the `/etc/default/locale` file an ensure `LANG=en_US.UTF-8` then reboot.
 
-# H2 Timezone
+## Timezone
 `sudo dpkg-reconfigure tzdata`
 
-# H2 Tools
+## Tools
 ```
 apt-get -y install git
 apt-get -y install sudo less
 ```
 
-# H2 Add User
+## Add User
 `useradd px4`
 `passwd px4` (set the password to px4)
 `usermod -aG sudo px4`
