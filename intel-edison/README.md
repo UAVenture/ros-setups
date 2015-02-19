@@ -10,8 +10,8 @@ Connect to the console with 115000 8N1, for example: screen /dev/USB0 115200 8N1
 
 After Ubilinux has been installed you will end up with the following partitions:
 
-Partitions
-Post Ubilinux Install
+# H2 Post Ubilinux Install
+```
 Filesystem       Size  Used Avail Use% Mounted on
 rootfs           1.4G  520M  796M  40% /
 /dev/root        1.4G  520M  796M  40% /
@@ -22,10 +22,12 @@ tmpfs            193M     0  193M   0% /run/shm
 tmpfs            481M     0  481M   0% /tmp
 /dev/mmcblk0p7    32M  5.1M   27M  16% /boot
 /dev/mmcblk0p10  1.6G  2.4M  1.6G   1% /home
+```
 
 Once ROS is installed there won't be much space left on the root partition. TODO: Add howto on freeing up space.
 
-Post ROS Install
+# H2 Post ROS Install
+```
 Filesystem       Size  Used Avail Use% Mounted on
 rootfs           1.4G  1.3G   27M  98% /
 /dev/root        1.4G  1.3G   27M  98% /
@@ -36,40 +38,50 @@ tmpfs            193M     0  193M   0% /run/shm
 tmpfs            481M     0  481M   0% /tmp
 /dev/mmcblk0p7    32M  5.1M   27M  16% /boot
 /dev/mmcblk0p10  1.6G  156M  1.4G  11% /home
+```
 
 # Post Installation Steps
 
-Wifi
-Run wpa_passphrase UAVenture password to generate psk.
-cd /etc/network
+# H2 Wifi
+Run `wpa_passphrase your-ssid your-wifi-password` to generate pka.
+`cd /etc/network`
 Edit interfaces
-Change SSID
-Change pka
-Comment out auto usb0
-Uncomment auto wlan0
-TODO: Static IP
-Save
-Run: ifup wlan0
-Update
+- Change SSID
+- Change pka
+- Comment out `auto usb0`
+- Uncomment `auto wlan0`
+- TODO: Static IP
+- Save
+Run: `ifup wlan0`
+
+# H2 Update
+```
 apt-get -y update
 apt-get -y upgrade
+```
 
-Locales
-dpkg-reconfigure locales (select only en_US.UTF8)
+# H2 Locales
+```
+dpkg-reconfigure locales # Select only en_US.UTF8
 locale-gen en_US
 update-locale
-Update the /etc/default/locale file an ensure LANG=en_US.UTF-8 then reboot.
-Timezone
-sudo dpkg-reconfigure tzdata
-Tools
+```
+Update the `/etc/default/locale` file an ensure `LANG=en_US.UTF-8` then reboot.
+
+# H2 Timezone
+`sudo dpkg-reconfigure tzdata`
+
+# H2 Tools
+```
 apt-get -y install git
 apt-get -y install sudo less
-Add User
-useradd px4
-passwd px4 (set the password to px4)
-usermod -aG sudo px4
-usermod -aG dialout px4
+```
 
+# H2 Add User
+`useradd px4`
+`passwd px4` (set the password to px4)
+`usermod -aG sudo px4`
+`usermod -aG dialout px4`
 
 Login as px4 to continue.
 
@@ -79,7 +91,7 @@ As ROS packages for the Edison/Ubilinux don't exist we will have to build it fro
 
 Run the script provided here called install_ros.sh as follows:
 
-sudo ./install_ros.sh
+`sudo ./install_ros.sh`
 
 alternatively copy paste line by line each step in the script (obviously you can skip the lines starting with "echo" :)
 
