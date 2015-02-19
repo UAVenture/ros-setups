@@ -94,11 +94,8 @@ Login as px4 to continue.
 
 As ROS packages for the Edison/Ubilinux don't exist we will have to build it from source. This process will take about 1.5 hours but most of it is just waiting for it to build.
 
-Run the script provided here called install_ros.sh as follows:
+A script has been writen to automate the building and installation of ROS. Current testing has been copy-pasting line by line to the console. Willing testers are encouraged to try out running the script:
 
 `sudo ./install_ros.sh`
 
-alternatively copy paste line by line each step in the script (obviously you can skip the lines starting with "echo" :)
-
 If all went well you should have a ROS installtion. Hook your Edison up to the Pixhawk and run a test. See this page (TODO) for instructions.
-
