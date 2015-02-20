@@ -66,10 +66,10 @@ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release 
 echo "source /opt/ros/indigo/setup.bash" >> ~/.profile
 source ~/.profile
 
-cd ~/ros_catkin_ws
-catkin_make
 echo "source ~/ros_catkin_ws/devel_isolated/setup.bash" >> ~/.bashrc
 source ~/.bashrc
+
+cd ~/ros_catkin_ws
 
 echo ""
 echo "*** FINISHED! ***"
