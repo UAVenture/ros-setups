@@ -97,7 +97,6 @@ class Setpoint:
 def setpoint_demo():
     pub = rospy.Publisher('/mavros/setpoint/local_position', PoseStamped, queue_size=10)
     
-
     rospy.init_node('pose', anonymous=True)
     rate = rospy.Rate(10) 
 
@@ -108,13 +107,13 @@ def setpoint_demo():
     setpoint.set(0.0, 0.0, 10.0, 5)
 
     print "Sink"
-    setpoint.set(0.0, 0.0, 3.0, 5)
+    setpoint.set(0.0, 0.0, 8.0, 5)
 
     print "Fly to the right"
-    setpoint.set(10.0, 4.0, 3.0, 5)
+    setpoint.set(10.0, 4.0, 8.0, 5)
 
     print "Fly to the left"
-    setpoint.set(0.0, 0.0, 3.0, 5)
+    setpoint.set(0.0, 0.0, 8.0, 5)
 
     offset_x = 0.0
     offset_y = 0.0
@@ -148,6 +147,7 @@ def setpoint_demo():
             break
 
     # Simulate a slow landing.
+    setpoint.set(0.0, 0.0,  8.0, 5)
     setpoint.set(0.0, 0.0,  3.0, 5)
     setpoint.set(0.0, 0.0,  2.0, 2)
     setpoint.set(0.0, 0.0,  1.0, 2)
