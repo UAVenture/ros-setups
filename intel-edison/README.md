@@ -90,7 +90,7 @@ apt-get -y install sudo less
 
 Login as px4 to continue.
 
-# ROS Installation
+# ROS/MAVROS Installation
 
 As ROS packages for the Edison/Ubilinux don't exist we will have to build it from source. This process will take about 1.5 hours but most of it is just waiting for it to build.
 
@@ -98,4 +98,17 @@ A script has been writen to automate the building and installation of ROS. Curre
 
 `sudo ./install_ros.sh`
 
-If all went well you should have a ROS installtion. Hook your Edison up to the Pixhawk and run a test. See this page (TODO) for instructions.
+If all went well you should have a ROS installtion. Hook your Edison up to the Pixhawk and run a test. See this page for instructions: https://pixhawk.org/peripherals/onboard_computers/intel_edison
+
+# Python Flight App
+
+Once you have a functional ROS setup you can *very carefully* perform an offboard flight using the setpoint_demo.py script. This script assumes that you have already successfully run `roslaunch mavros px4.launch`.
+
+WARNING WARNING: Make sure you can take control via RC transmitter at any time, things can go quite wrong. Also be aware that there isn't any velocity control currently and the multirotor will use max velocity at times. Read the code before you fly so you know what to expect.
+
+Launch the demo by running:
+
+`./setpoint_demo.py`
+
+and once it is running activate offboard control on your RC transmitter.
+
