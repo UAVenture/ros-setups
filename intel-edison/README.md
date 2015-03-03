@@ -96,7 +96,7 @@ As ROS packages for the Edison/Ubilinux don't exist we will have to build it fro
 
 A script has been writen to automate the building and installation of ROS. Current testing has been copy-pasting line by line to the console. Willing testers are encouraged to try out running the script:
 
-`sudo ./install_ros.sh`
+`./install_ros.sh`
 
 If all went well you should have a ROS installtion. Hook your Edison up to the Pixhawk and run a test. See this page for instructions: https://pixhawk.org/peripherals/onboard_computers/intel_edison
 
