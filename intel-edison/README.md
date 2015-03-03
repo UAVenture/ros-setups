@@ -83,7 +83,7 @@ apt-get -y install sudo less
 ```
 
 ## Add User
-`useradd px4`
+`adduser px4`
 `passwd px4` (set the password to px4)
 `usermod -aG sudo px4`
 `usermod -aG dialout px4`
