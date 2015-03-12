@@ -4,6 +4,8 @@
 
 To flash Ubilinux carefully follow the instruction here http://www.emutexlabs.com/ubilinux/29-ubilinux/218-ubilinux-installation-instructions-for-intel-edison
 
+The Ubilinux image can be downloaded from this page: http://www.emutexlabs.com/ubilinux
+
 Make sure you have the console USB cable in place and use it so you know when the installation has finished. You MUST NOT remove power before it’s done or it could be bricked. If you don't have a console connection make sure you wait 2 minutes at the end of the installation as it instructs. During this time it is completing the installion which shoudln't be interrupted.
 
 Connect to the console with 115000 8N1, for example: 
