@@ -61,9 +61,9 @@ echo “******************************************************************”
 echo “About to start some heavy building. Go have a looong coffee break.”
 echo “******************************************************************”
 
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/indigo
+sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /home/ros/indigo
 
-echo "source /opt/ros/indigo/setup.bash" >> ~/.profile
+echo "source /home/ros/indigo/setup.bash" >> ~/.profile
 source ~/.profile
 
 echo "source ~/ros_catkin_ws/devel_isolated/setup.bash" >> ~/.bashrc
