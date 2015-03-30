@@ -25,8 +25,6 @@ and login as root (password: edison)
 After Ubilinux has been installed you will end up with the following partitions:
 
 ```
-Latest Ubilinux 
-
 Filesystem       Size  Used Avail Use% Mounted on
 rootfs           1.4G  813M  503M  62% /
 /dev/root        1.4G  813M  503M  62% /
@@ -37,19 +35,6 @@ tmpfs            193M     0  193M   0% /run/shm
 tmpfs            481M     0  481M   0% /tmp
 /dev/mmcblk0p7    32M  5.3M   27M  17% /boot
 /dev/mmcblk0p10  1.3G  2.0M  1.3G   1% /home
-
-Older Ubilinux
-
-Filesystem       Size  Used Avail Use% Mounted on
-rootfs           1.4G  520M  796M  40% /
-/dev/root        1.4G  520M  796M  40% /
-devtmpfs         481M     0  481M   0% /dev
-tmpfs             97M  288K   96M   1% /run
-tmpfs            5.0M     0  5.0M   0% /run/lock
-tmpfs            193M     0  193M   0% /run/shm
-tmpfs            481M     0  481M   0% /tmp
-/dev/mmcblk0p7    32M  5.1M   27M  16% /boot
-/dev/mmcblk0p10  1.6G  2.4M  1.6G   1% /home
 ```
 
 ## Post ROS Install
@@ -57,18 +42,25 @@ Once ROS is installed there won't be much space left on the root partition. TODO
 
 ```
 Filesystem       Size  Used Avail Use% Mounted on
-rootfs           1.4G  1.3G   27M  98% /
-/dev/root        1.4G  1.3G   27M  98% /
-devtmpfs         481M     0  481M   0% /dev
-tmpfs             97M  296K   96M   1% /run
+rootfs           1.4G  1.1G  194M  86% /
+/dev/root        1.4G  1.1G  194M  86% /
+devtmpfs         480M     0  480M   0% /dev
+tmpfs             97M  304K   96M   1% /run
 tmpfs            5.0M     0  5.0M   0% /run/lock
 tmpfs            193M     0  193M   0% /run/shm
-tmpfs            481M     0  481M   0% /tmp
-/dev/mmcblk0p7    32M  5.1M   27M  16% /boot
-/dev/mmcblk0p10  1.6G  156M  1.4G  11% /home
+tmpfs            481M  6.6M  474M   2% /tmp
+/dev/mmcblk0p7    32M  5.3M   27M  17% /boot
+/dev/mmcblk0p10  1.3G  381M  910M  30% /home
 ```
 
 # Post Installation Steps
+
+## Freeing up Space on the Root Partition
+
+You will need more space on the root partition. Run the following commands:
+
+`mv /var/cache /home/`
+`ln -s /home/cache /var/cache`
 
 ## Wifi
 Run `wpa_passphrase your-ssid your-wifi-password` to generate pka.
@@ -153,9 +145,6 @@ Launch the demo by running:
 
 and once it is running activate offboard control on your RC transmitter.
 
-# Freeing up Space on the Root Partition
+## Freeing up Space on the Root Partition
 
-If you need more space on the root partition there are two directories which can be moved to the home partition which should give you up to around 500Mb space. Run the following commands:
-
-`mv /var/cache /home/`
-`ln -s /home/cache /var/cache`
+Once again we will remove unneeded files from the root partition. You can delete the files in root's home directory (that's /root) or move them to the home partition.
