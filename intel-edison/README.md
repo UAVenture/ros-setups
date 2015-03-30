@@ -104,10 +104,11 @@ apt-get -y upgrade
 ## Locales
 ```
 dpkg-reconfigure locales # Select only en_US.UTF8 and select None as the default on the confirmation page that follows.
-locale-gen en_US
 update-locale
 ```
 Update the `/etc/default/locale` file an ensure `LANG=en_US.UTF-8` then reboot.
+
+Note that if you receive warning messages about missing or wrong languages this is likely to be due to the locale being forwarded when using SSH. Either ignore them or complete this step via the serial console by commenting out the SendEnv LANG LC_* line in the local /etc/ssh/ssh_config file on your machine (not the Edison).
 
 ## Timezone
 `sudo dpkg-reconfigure tzdata`
@@ -132,7 +133,11 @@ As ROS packages for the Edison/Ubilinux don't exist we will have to build it fro
 
 A script has been writen to automate the building and installation of ROS. Current testing has been copy-pasting line by line to the console. Willing testers are encouraged to try out running the script:
 
-`./install_ros.sh`
+```
+git clone https://github.com/UAVenture/ros-setups
+cd ros-setups/intel-edison/
+./install_ros.sh
+```
 
 If all went well you should have a ROS installtion. Hook your Edison up to the Pixhawk and run a test. See this page for instructions: https://pixhawk.org/peripherals/onboard_computers/intel_edison
 
