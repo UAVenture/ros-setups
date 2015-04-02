@@ -74,6 +74,8 @@ echo “******************************************************************”
 echo "*** Building ROS ***"
 sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /home/ros/indigo
 
+sudo ln -sf /home/ros /opt/
+
 echo "*** Updating .profile and .bashrc ***"
 echo "source /home/ros/indigo/setup.bash" >> ~/.profile
 source ~/.profile
