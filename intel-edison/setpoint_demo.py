@@ -67,7 +67,7 @@ class Setpoint:
         # TODO(simon): Clean this up.
         self.done = False
         self.done_evt = threading.Event()
-        sub = rospy.Subscriber('/mavros/position/local', PoseStamped, self.reached)
+        sub = rospy.Subscriber('/mavros/local_position/local', PoseStamped, self.reached)
 
     def navigate(self):
         rate = self.rospy.Rate(10) # 10hz
@@ -114,7 +114,7 @@ class Setpoint:
             self.done_evt.set()
 
 def setpoint_demo():
-    pub = rospy.Publisher('/mavros/setpoint/local_position', PoseStamped, queue_size=10)
+    pub = rospy.Publisher('/mavros/setpoint_position/local', PoseStamped, queue_size=10)
     
     rospy.init_node('pose', anonymous=True)
     rate = rospy.Rate(10) 
