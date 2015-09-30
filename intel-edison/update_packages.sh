@@ -15,8 +15,14 @@ diff indigo-ros_comm-wet.rosinstall indigo-ros_comm-wet.rosinstall_old
 
 # update .rosinstall
 sudo wstool merge -t src indigo-ros_comm-wet.rosinstall
-# fetch sources (you have to confirm the update for each package)
-sudo wstool up -t src
+# fetch sources
+while [ $? != 0 ]; do
+  echo "*** wstool - download failures, retrying ***"
+  sudo wstool up -t src -j1 --delete-changed-uris
+done
+
+# update dependencies
+rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:wheezy
 
 # remove previously built artifacts
 # Note: this seemed to be required in my case to rebuild everything correctly,
