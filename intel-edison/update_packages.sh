@@ -6,6 +6,13 @@
 # http://answers.ros.org/question/109656/maintaining-a-ros-source-install-add-packages-update-release/
 #
 
+# update tools
+sudo apt-get -y upgrade
+# Note: pip could complain about mission files. if these are broken symlinks just delete them and retry.
+# see: https://github.com/pypa/pip/issues/2438
+sudo pip install --upgrade catkin-pkg rosinstall_generator wstool rosinstall
+
+cd ~/ros_catkin_ws
 # backup old package pointers
 mv indigo-ros_comm-wet.rosinstall indigo-ros_comm-wet.rosinstall_old
 # fetch latest package pointers
@@ -22,6 +29,7 @@ while [ $? != 0 ]; do
 done
 
 # update dependencies
+rosdep update
 rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:wheezy
 
 # remove previously built artifacts
@@ -32,5 +40,3 @@ mv devel_isolated devel_isolated_old
 
 # start compilation and have a beer
 sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release -DMAVLINK_DIALECT=pixhawk --install-space /home/ros/indigo
-
-

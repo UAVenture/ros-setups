@@ -22,7 +22,7 @@ sudo apt-get -y upgrade
 
 echo "*** Install required OS packages ***"
 sudo apt-get -y install pkg-config
-sudo apt-get -y install python-setuptools python-pip python-yaml python-argparse python-distribute python-docutils python-dateutil python-setuptools python-six
+sudo apt-get -y install python-setuptools python-pip python-yaml python-argparse python-distribute python-docutils python-dateutil python-six
 
 echo "*** Install required ROS packages ***"
 sudo pip install rosdep rosinstall_generator wstool rosinstall
