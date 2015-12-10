@@ -57,7 +57,7 @@ echo "*** Install console bridge ***"
 cd ~/ros_catkin_ws/external_src
 sudo apt-get -y build-dep console-bridge
 apt-get -y source -b console-bridge
-sudo dpkg -i libconsole-bridge0.2_*.deb libconsole-bridge-dev_*.deb
+sudo dpkg -i libconsole-bridge0.2*.deb libconsole-bridge-dev*.deb
 
 echo "*** Install liblz4-dev ***"
 sudo apt-get -y install liblz4-dev
