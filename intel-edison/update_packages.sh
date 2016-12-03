@@ -30,7 +30,7 @@ done
 
 # update dependencies
 rosdep update
-rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:wheezy
+rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:jessie
 
 # remove previously built artifacts
 # Note: this seemed to be required in my case to rebuild everything correctly,
