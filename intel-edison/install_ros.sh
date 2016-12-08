@@ -10,7 +10,7 @@ fi
 
 echo "*** Update sources.list ***"
 
-sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu wheezy main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu jessie main" > /etc/apt/sources.list.d/ros-latest.list'
 
 echo "*** Get ROS and Raspian keys ***"
 wget https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -O - | sudo apt-key add -
@@ -50,7 +50,7 @@ echo "*** Install cmake and update sources.list ***"
 mkdir ~/ros_catkin_ws/external_src
 sudo apt-get -y install checkinstall cmake
 sudo sh -c 'echo "deb-src http://mirrordirector.raspbian.org/raspbian/ testing main contrib non-free rpi" >> /etc/apt/sources.list'
-sudo sh -c 'echo "deb http://http.debian.net/debian wheezy-backports main" >> /etc/apt/sources.list'
+sudo sh -c 'echo "deb http://http.debian.net/debian jessie-backports main" >> /etc/apt/sources.list'
 sudo apt-get -y update
 
 echo "*** Install console bridge ***"
@@ -65,14 +65,14 @@ sudo apt-get -y install liblz4-dev
 echo "*** rosdep install - Errors at the end are normal ***"
 cd ~/ros_catkin_ws
 #  Python errors after the following command are normal.
-rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:wheezy
+rosdep install --from-paths src --ignore-src --rosdistro indigo -y -r --os=debian:jessie
 
 echo “******************************************************************”
 echo “About to start some heavy building. Go have a looong coffee break.”
 echo “******************************************************************”
 
 echo "*** Building ROS ***"
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release -DMAVLINK_DIALECT=pixhawk --install-space /home/ros/indigo
+sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release -j1 -l1 -DMAVLINK_DIALECT=common --install-space /home/ros/indigo
 
 sudo ln -sf /home/ros /opt/
 

@@ -4,13 +4,12 @@
 
 Before starting with the installation it's a good idea to boot the Edison straight out of the box to make sure it's working. This way we can make sure we have a functional board before proceeding and we won't be mistakenly blaming setup issues if something is wrong here.
 
-Connect one USB cable to the cosole port and then start your temrminal app (see next section for more information on this). Once you are connected plug in the second USB cable for power and after 15 seconds you should see the system booting. If you want to login the user name is root (no password).
+Connect one USB cable to the console port and then start your temrminal app (see next section for more information on this). Once you are connected plug in the second USB cable for power and after 15 seconds you should see the system booting. If you want to login the user name is root (no password).
 
-# Flash Ubilinux
+# Flash Debian
 
-To flash Ubilinux carefully follow the instruction here http://www.emutexlabs.com/ubilinux/29-ubilinux/218-ubilinux-installation-instructions-for-intel-edison
+To flash Debian carefully follow the instruction here http://ardupilot.org/dev/docs/intel-edison.html
 
-The Ubilinux image can be downloaded from this page: http://www.emutexlabs.com/ubilinux
 
 Make sure you have the console USB cable in place and use it so you know when the installation has finished. You MUST NOT remove power before it’s done or it could be bricked. If you don't have a console connection make sure you wait 2 minutes at the end of the installation as it instructs. During this time it is completing the installion which shoudln't be interrupted. If you don't get any update on your console after this message is displayed restart your console terminal connection.
 
@@ -21,71 +20,12 @@ Connect to the console with 115000 8N1, for example:
 and login as root (password: edison)
 
 
-## Post Ubilinux Install
-After Ubilinux has been installed you will end up with the following partitions:
-
-```
-Filesystem       Size  Used Avail Use% Mounted on
-rootfs           1.4G  813M  503M  62% /
-/dev/root        1.4G  813M  503M  62% /
-devtmpfs         480M     0  480M   0% /dev
-tmpfs             97M  292K   96M   1% /run
-tmpfs            5.0M     0  5.0M   0% /run/lock
-tmpfs            193M     0  193M   0% /run/shm
-tmpfs            481M     0  481M   0% /tmp
-/dev/mmcblk0p7    32M  5.3M   27M  17% /boot
-/dev/mmcblk0p10  1.3G  2.0M  1.3G   1% /home
-```
-
-## Post ROS Install
-Once ROS is installed there won't be much space left on the root partition. TODO: Add howto on freeing up space.
-
-```
-Filesystem       Size  Used Avail Use% Mounted on
-rootfs           1.4G  1.1G  194M  86% /
-/dev/root        1.4G  1.1G  194M  86% /
-devtmpfs         480M     0  480M   0% /dev
-tmpfs             97M  304K   96M   1% /run
-tmpfs            5.0M     0  5.0M   0% /run/lock
-tmpfs            193M     0  193M   0% /run/shm
-tmpfs            481M  6.6M  474M   2% /tmp
-/dev/mmcblk0p7    32M  5.3M   27M  17% /boot
-/dev/mmcblk0p10  1.3G  381M  910M  30% /home
-```
 
 # Post Installation Steps
 
-## Freeing up Space on the Root Partition
+## Remove droneapi
 
-You will need more space on the root partition. Run the following commands:
-
-`mv /var/cache /home/`
-`ln -s /home/cache /var/cache`
-
-## Wifi
-Run `wpa_passphrase your-ssid your-wifi-password` to generate pka.
-`cd /etc/network`
-Edit /etc/network/interfaces
-- Change wpa-ssid
-- Change wpa-pka
-- Comment out `auto usb0` plus the three lines that follow it (interface definition)
-- Uncomment `auto wlan0`
-- Save
-Run: `ifup wlan0`
-
-If you want to use a static IP then your config will look something like this:
-```
-auto wlan0
-iface wlan0 inet static
-    # For WPA
-    wpa-ssid <your-ssid>
-    wpa-psk <your-ssid-psk>
-
-    address 192.168.43.101
-    netmask 255.255.255.0
-```
-
-For the remaining steps you may wish to login via ssh instead.
+sudo pip uninstall droneapi
 
 ## Update
 ```
@@ -93,23 +33,6 @@ apt-get -y update
 apt-get -y upgrade
 ```
 
-## Locales
-```
-dpkg-reconfigure locales # Select only en_US.UTF8 and select None as the default on the confirmation page that follows.
-update-locale
-```
-Update the `/etc/default/locale` file an ensure `LANG=en_US.UTF-8` then reboot.
-
-Note that if you receive warning messages about missing or wrong languages this is likely to be due to the locale being forwarded when using SSH. Either ignore them or complete this step via the serial console by commenting out the SendEnv LANG LC_* line in the local /etc/ssh/ssh_config file on your machine (not the Edison).
-
-## Timezone
-`sudo dpkg-reconfigure tzdata`
-
-## Tools
-```
-apt-get -y install git
-apt-get -y install sudo less
-```
 
 ## Add User
 `adduser px4`
